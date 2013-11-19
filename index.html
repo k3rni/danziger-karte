@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Danziger Karte</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+        html, body, #map-canvas {
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOxV2KkuHs_yWyNceXVQKGfddI93mEbvY&sensor=false"></script>
+    <script type="text/javascript">
+        function dk_init() {
+            var mapOpts = {
+              zoom: 11,
+              center: new google.maps.LatLng(54.395951, 18.620743)
+            };
+            var imgBounds = new google.maps.LatLngBounds(
+                    // SW
+                    new google.maps.LatLng(54.29008,18.408266),
+                    // NE
+                    new google.maps.LatLng(54.454225, 18.829536)); 
+            map = new google.maps.Map(document.getElementById('map-canvas'), mapOpts);
+            overlay = new google.maps.GroundOverlay('/umgebung_danzig.jpg', imgBounds);
+            overlay.setMap(map);
+            overlay.setOpacity(0.5);
+        }
+        google.maps.event.addDomListener(window, 'load', dk_init);
+    </script>
+  </head>
+  <body>
+      <div id="map-canvas" style="width: 100%"></div>
+  </body>
+</html>
